@@ -1,8 +1,9 @@
 import React from "react";
 import { Route, Routes } from "react-router";
 import HomePage from "./pages/Home";
+import ProductPage from "./pages/Product"
 import NotFoundPage from "./NotFound";
-import Asidebar from "./components/Asidebar";
+import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { useEffect, useState } from "react";
@@ -10,6 +11,8 @@ import { useEffect, useState } from "react";
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
+
+    
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 768) {
@@ -19,19 +22,23 @@ function App() {
       }
     };
 
-    // Run on initial render
+    
     handleResize();
 
-    // Add event listener
+    
     window.addEventListener("resize", handleResize);
 
-    // Clean up on unmount
+    
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+
   return (
     <>
-    <h2>Hello</h2>
-      <Asidebar isShow={isSidebarOpen} />
+    <section className="">
+      <Sidebar isShow={isSidebarOpen} />
+
+    </section>
 
       <section
         className={`transition-all duration-1000 ${
@@ -41,6 +48,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/Product" element={<ProductPage/>} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <Footer />
